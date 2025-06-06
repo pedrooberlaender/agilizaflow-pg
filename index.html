@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgilizaFLow - Inteligência Artificial para Negócios</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <style>
+    :root {
+      --primary: #3e8cff;
+      --secondary: #1861ce;
+      --bg: #0a0a0f;
+      --bg-card: #18182a;
+      --bg-section: #13132a;
+      --bg-hero-blue: #4791ff6e;
+      --text: #f5f5f7;
+      --text-light: #bdbdf7;
+      --accent: #fff;
+      --radius: 20px;
+      --shadow: 0 4px 24px #3e8cff33;
+      --transition: 0.25s cubic-bezier(.4,0,.2,1);
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      margin: 0;
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    header {
+      background: var(--bg-card);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px #0002;
+      transition: background 0.3s;
+    }
+    header .container {
+      padding-top: 0;
+      padding-bottom: 0;
+      min-height: 70px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .logo {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 1px;
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+    nav {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.05rem;
+      padding: 8px 18px;
+      border-radius: 8px;
+      transition: background var(--transition), color var(--transition);
+    }
+    nav a:hover, nav a.active {
+      background: var(--primary);
+      color: var(--accent);
+    }
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 0 60px 0;
+      margin-top: 0;
+      gap: 20px;
+      background: var(--bg-hero-blue);
+      background-image: none;
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      box-sizing: border-box;
+      min-height: calc(100vh - 70px);
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDUwMCA1MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0yNTAgMUMxMTIgMSAxIDEyMCAxIDI1MFMxMTIgNTAwIDI1MCA1MDAgNTAwIDM4OCA1MDAgMjUwIDM4OCA1MCAyNTAgMTZaTTMyNi4yIDE3Ny41QzMyNi4yIDE2Ni4yIDMyMC44IDE1NS44IDMxMS45IDE0OC40QzMwMyAxNDEgMjg5LjkgMTM2LjcgMjc2LjYgMTM2LjdIMjIzdjExOS45aDQ2LjFjMTMuMiAwIDI2LjMtNC4zIDM1LjItMTEuN0MzMjAuOCAyMzYuMiAzMjYuMiAyMjUuOCAzMjYuMiAyMTQuNVYxNzcuNVpNMTczLjggMjkwLjRDMTczLjggMzAxLjggMTc5LjMgMzEyLjEgMTg4LjMgMzE5LjVMMjE5LjUgMzQ4LjJWNDIyaDY0LjZWNDAyLjRMMzEyLjggMzU1LjdDMzIxLjggMzQ4LjMgMzI3LjMgMzM4IDMyNy4zIDMyNi43VjI4MS45SDI3OS4zVjMyNi43QzI3OS4zIDMyNy45IDI3OS4yIDMyOSAyNzkgMzMwQzI3OC44IDMzMS4xIDI3OC41IDMzMi4yIDI3OCAzMzMuMkMyNzcuNSAzMzQuMiAyNzYuOCAzMzUuMiAyNzYgMzM2QzI3NS4xIDMzNi44IDI3NCAzMzcuNSA and more...');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.1;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+    }
+    .hero .container {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .hero-tags {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .hero-tag {
+      display: inline-block;
+      background: var(--secondary);
+      color: var(--accent);
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: 6px;
+      padding: 5px 14px;
+      letter-spacing: 0.5px;
+    }
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+      color: var(--accent);
+      line-height: 1.1;
+    }
+    .hero-title span {
+      color: var(--primary);
+    }
+    .hero-subtitle {
+      font-size: 1.3rem;
+      color: var(--text-light);
+      max-width: 700px;
+      margin: 0 auto 40px auto;
+      line-height: 1.5;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .cta-btn {
+      background: var(--primary);
+      color: var(--accent);
+      border: none;
+      padding: 15px 35px;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      outline: none;
+      position: relative;
+      overflow: hidden;
+      min-width: 200px;
+      text-align: center;
+    }
+    .hero-btns .cta-btn:last-child {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      box-shadow: none;
+    }
+    .cta-btn:active {
+      transform: scale(0.97);
+      box-shadow: 0 2px 8px var(--primary);
+    }
+    .cta-btn::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255,255,255,0.2);
+      border-radius: 100%;
+      transform: translate(-50%, -50%);
+      transition: width 0.4s, height 0.4s;
+      z-index: 0;
+    }
+    .cta-btn:hover::after {
+      width: 300px;
+      height: 300px;
+    }
+    .hero-info {
+      color: var(--text-light);
+      font-size: 1rem;
+      margin-top: -70px;
+      opacity: 0.8;
+    }
+    section {
+      margin: 64px 0;
+    }
+    .section-title {
+      font-size: 2.1rem;
+      color: var(--primary);
+      margin-bottom: 36px;
+      text-align: center;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      justify-content: center;
+    }
+    .card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 36px 28px;
+      flex: 1 1 260px;
+      max-width: 320px;
+      min-width: 240px;
+      text-align: left;
+      transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .card:hover {
+      transform: translateY(-10px) scale(1.04);
+      box-shadow: 0 8px 32px #7b5cff55;
+      background: var(--bg-section);
+    }
+    .card-title {
+      font-size: 1.25rem;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+    .card-desc {
+      color: var(--text-light);
+      font-size: 1.05rem;
+      line-height: 1.5;
+    }
+    .steps {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      justify-content: center;
+      margin-top: 32px;
+    }
+    .step {
+      background: var(--bg-section);
+      border-radius: var(--radius);
+      padding: 32px 22px;
+      flex: 1 1 200px;
+      max-width: 260px;
+      min-width: 180px;
+      text-align: center;
+      color: var(--accent);
+      box-shadow: var(--shadow);
+      transition: transform var(--transition), box-shadow var(--transition);
+      position: relative;
+    }
+    .step:hover {
+      transform: scale(1.04) translateY(-6px);
+      box-shadow: 0 8px 32px #3e8cff55;
+    }
+    .step-number {
+      font-size: 2.3rem;
+      color: var(--primary);
+      font-weight: 700;
+      margin-bottom: 10px;
+      display: inline-block;
+      background: #fff1;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      line-height: 48px;
+    }
+    .diferenciais {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      justify-content: center;
+      margin-top: 32px;
+    }
+    .diferencial {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 28px 18px;
+      flex: 1 1 200px;
+      max-width: 260px;
+      min-width: 180px;
+      text-align: center;
+      color: var(--accent);
+      font-size: 1.05rem;
+      box-shadow: var(--shadow);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .diferencial:hover {
+      transform: scale(1.04) translateY(-6px);
+      box-shadow: 0 8px 32px #3e8cff55;
+    }
+    .depoimentos {
+      margin-top: 32px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      justify-content: center;
+    }
+    .depoimento {
+      background: var(--bg-section);
+      border-radius: var(--radius);
+      padding: 28px 18px;
+      flex: 1 1 260px;
+      max-width: 320px;
+      min-width: 200px;
+      color: var(--accent);
+      font-size: 1.05rem;
+      box-shadow: var(--shadow);
+      transition: transform var(--transition), box-shadow var(--transition);
+      position: relative;
+    }
+    .depoimento:before {
+      content: '“';
+      font-size: 2.5rem;
+      color: var(--primary);
+      position: absolute;
+      left: 18px;
+      top: 10px;
+      opacity: 0.2;
+    }
+    .depoimento b {
+      color: var(--primary);
+      font-size: 1em;
+      display: block;
+      margin-top: 18px;
+    }
+    form {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 32px 24px;
+      margin-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      max-width: 420px;
+      margin-left: auto;
+      margin-right: auto;
+      animation: fadeInUp 1s;
+    }
+    input, textarea {
+      padding: 14px;
+      border-radius: 10px;
+      border: none;
+      font-size: 1.05rem;
+      background: var(--bg-section);
+      color: var(--accent);
+      outline: none;
+      transition: box-shadow var(--transition), background var(--transition);
+      box-shadow: 0 2px 8px #7b5cff11;
+      resize: none;
+    }
+    input:focus, textarea:focus {
+      background: #23234a;
+      box-shadow: 0 0 0 2px var(--primary);
+    }
+    footer {
+      background: var(--bg-card);
+      color: var(--text-light);
+      text-align: center;
+      padding: 36px 0 18px 0;
+      margin-top: 64px;
+      font-size: 1rem;
+      border-top: 1px solid #23234a;
+    }
+    footer a {
+      color: var(--primary);
+      margin: 0 8px;
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+    footer a:hover {
+      color: var(--secondary);
+    }
+    @keyframes fadeInLeft {
+      from { opacity: 0; transform: translateX(-40px); }
+      to { opacity: 1; transform: none; }
+    }
+    @keyframes fadeInRight {
+      from { opacity: 0; transform: translateX(40px); }
+      to { opacity: 1; transform: none; }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: none; }
+    }
+    @media (max-width: 1100px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        gap: 0;
+      }
+      .hero-img {
+        margin-top: 32px;
+      }
+    }
+    @media (max-width: 900px) {
+      .container {
+        padding: 0 10px;
+      }
+      .cards, .steps, .diferenciais, .depoimentos {
+        flex-direction: column;
+        align-items: center;
+      }
+      nav {
+        gap: 10px;
+      }
+      .solucoes-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .solu-card {
+        padding: 24px 12px 24px 12px;
+      }
+      .solu-card-icone {
+        margin-right: 14px;
+      }
+      .solu-card-num {
+        font-size: 2rem;
+        right: 12px;
+        bottom: 10px;
+      }
+      .funciona-grid {
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+      }
+      .funciona-card {
+        min-width: 0;
+        max-width: 100%;
+        padding: 24px 10px 24px 10px;
+      }
+    }
+    @media (max-width: 600px) {
+      .hero-title {
+        font-size: 2rem !important;
+      }
+      .section-title {
+        font-size: 1.5rem;
+      }
+      .card, .step, .diferencial, .depoimento {
+        min-width: 0;
+        max-width: 100%;
+        padding: 20px 10px;
+      }
+      form {
+        padding: 18px 6px;
+      }
+      .hero-btns .cta-btn { min-width: 0; width: 100%; }
+    }
+    /* Cards modernos para Soluções Inteligentes - Ajustes de UX */
+    .solucoes-full {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      max-width: 100vw;
+      padding: 0;
+    }
+    .solucoes-grid {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      gap: 32px;
+      justify-content: flex-start;
+      padding: 0 4vw 48px 4vw;
+      margin-top: 36px;
+      box-sizing: border-box;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    .solu-card {
+      min-width: 340px;
+      max-width: 400px;
+      flex: 0 0 340px;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      border-radius: 20px;
+      border: 1.5px solid var(--primary);
+      background: linear-gradient(120deg, #181f2a 80%, #232c3a 100%);
+      box-shadow: 0 6px 32px #3e8cff18;
+      padding: 32px 32px 28px 32px;
+      position: relative;
+      transition: box-shadow 0.25s, border 0.25s, transform 0.18s;
+      overflow: hidden;
+      scroll-snap-align: start;
+      z-index: 2;
+    }
+    .solu-card:hover {
+      box-shadow: 0 12px 36px #3e8cff33, 0 2px 8px #0002;
+      border: 2px solid var(--primary);
+      background: linear-gradient(120deg, #232c3a 80%, #181f2a 100%);
+    }
+    .solu-card-bg-emoji, .solu-card-icone {
+      display: none !important;
+    }
+    .solu-card-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .solu-card-title {
+      font-size: 1.13rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 10px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      text-align: left;
+    }
+    .solu-card-desc {
+      color: var(--text-light);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 0;
+      text-align: left;
+    }
+    .solu-card-num {
+      display: none;
+    }
+    @media (max-width: 1200px) {
+      .solu-card {
+        min-width: 300px;
+        max-width: 340px;
+        flex: 0 0 300px;
+        padding: 22px 10px 18px 10px;
+      }
+      .solu-card-title {
+        font-size: 1rem;
+      }
+      .solu-card-desc {
+        font-size: 0.97rem;
+      }
+    }
+    @media (max-width: 700px) {
+      .solu-card {
+        min-width: 180px;
+        max-width: 220px;
+        flex: 0 0 180px;
+        padding: 12px 4px 10px 4px;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .solu-card-content {
+        align-items: center;
+        text-align: center;
+      }
+      .solu-card-title, .solu-card-desc {
+        text-align: center;
+      }
+    }
+  </style>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const links = document.querySelectorAll('nav a');
+      function onScroll() {
+        const scrollPos = window.scrollY || window.pageYOffset;
+        links.forEach(link => {
+          const section = document.querySelector(link.getAttribute('href'));
+          if (section) {
+            const top = section.offsetTop - 80;
+            const bottom = top + section.offsetHeight;
+            if (scrollPos >= top && scrollPos < bottom) {
+              link.classList.add('active');
+            } else {
+              link.classList.remove('active');
+            }
+          }
+        });
+      }
+      window.addEventListener('scroll', onScroll);
+      onScroll();
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          const href = this.getAttribute('href');
+          if (href.length > 1 && document.querySelector(href)) {
+            e.preventDefault();
+            document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+  <header>
+    <div class="container" style="display: flex; align-items: center; justify-content: space-between; min-height: 70px;">
+      <a href="#" class="logo">AgilizaFLow</a>
+      <nav>
+        <a href="#sobre">Quem Somos</a>
+        <a href="#solucoes">Soluções</a>
+        <a href="#como-funciona">Como Funciona</a>
+        <a href="#diferenciais">Diferenciais</a>
+        <a href="#depoimentos">Depoimentos</a>
+        <a href="#contato">Contato</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="hero" style="flex-direction: column; align-items: center; text-align: center; justify-content: center; padding: 80px 0 60px 0;">
+      <div class="container">
+        <div class="hero-tags">
+          <span class="hero-tag">AUTOMAÇÃO INTELIGENTE</span>
+          <span class="hero-tag">EFICIÊNCIA EMPRESARIAL</span>
+        </div>
+        <h1 class="hero-title" style="font-size:3.2rem; font-weight:800; margin-bottom:18px; color:var(--accent); line-height:1.1;">
+          Desbloqueie o Potencial da Sua<br>Empresa com <span style="color:var(--primary);">Automação IA</span>
+        </h1>
+        <div class="hero-subtitle" style="font-size:1.25rem; color:var(--text-light); max-width:600px; margin:0 auto 36px auto;">
+          Transformamos tarefas repetitivas em fluxos otimizados, impulsionando a produtividade e o crescimento do seu negócio de forma inteligente e escalável.
+        </div>
+        <div class="hero-btns" style="display:flex; gap:18px; justify-content:center; margin-bottom:18px; flex-wrap:wrap;">
+          <a href="#solucoes" class="cta-btn" style="background:var(--accent); color:var(--bg-card); box-shadow:0 2px 16px #fff2; border:2px solid var(--accent); font-weight:800;">Conheça as Soluções</a>
+          <a href="#contato" class="cta-btn" style="background:transparent; color:var(--accent); border:2px solid var(--accent); font-weight:700;">Solicitar Orçamento</a>
+        </div>
+        <div class="hero-info" style="color:var(--text-light); font-size:1.05rem; margin-top:10px;">AgilizaFLow &bull; Inovação ao Seu Alcance</div>
+      </div>
+    </section>
+    <!-- Soluções Inteligentes -->
+    <section id="solucoes" class="container solucoes-full">
+      <h2 class="section-title">Soluções Inteligentes</h2>
+      <div class="solucoes-grid">
+        <div class="solu-card">
+          <div class="solu-card-content">
+            <div class="solu-card-title">Automação de Processos</div>
+            <div class="solu-card-desc">Reduza tarefas manuais e aumente a produtividade com fluxos automatizados sob medida para o seu negócio.</div>
+          </div>
+          <div class="solu-card-num">01</div>
+        </div>
+        <div class="solu-card">
+          <span class="icon-bg">
+          <div class="solu-card-content">
+            <div class="solu-card-title">Atendimento com IA</div>
+            <div class="solu-card-desc">Chatbots e assistentes virtuais treinados para oferecer suporte eficiente e humanizado aos seus clientes.</div>
+          </div>
+          <div class="solu-card-num">02</div>
+        </div>
+        <div class="solu-card">
+          <div class="solu-card-content">
+            <div class="solu-card-title">Análise de Dados</div>
+            <div class="solu-card-desc">Transforme dados em decisões estratégicas com inteligência artificial e dashboards personalizados.</div>
+          </div>
+          <div class="solu-card-num">03</div>
+        </div>
+        <div class="solu-card">
+          <div class="solu-card-content">
+            <div class="solu-card-title">Integração de Sistemas</div>
+            <div class="solu-card-desc">Conecte diferentes plataformas e otimize sua operação com integrações inteligentes.</div>
+          </div>
+          <div class="solu-card-num">04</div>
+        </div>
+      </div>
+    </section>
+    <section id="como-funciona" class="container">
+      <h2 class="section-title">Como Funciona</h2>
+      <div class="funciona-grid">
+        <div class="funciona-card">
+          <div class="funciona-icon-circle">
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="18" cy="18" r="18" fill="#18182a"/>
+              <path d="M18 25V13M18 13l-4 4M18 13l4 4" stroke="#a259ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="funciona-num">01</div>
+          <div class="funciona-title">Você envia ou conecta seus documentos</div>
+          <div class="funciona-desc">Upload fácil de arquivos ou integração com seus sistemas existentes.</div>
+        </div>
+        <div class="funciona-card">
+          <div class="funciona-icon-circle">
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="18" cy="18" r="18" fill="#18182a"/>
+              <path d="M13 18a5 5 0 0 1 10 0v2a5 5 0 0 1-10 0v-2Zm0 0h10" stroke="#a259ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="funciona-num">02</div>
+          <div class="funciona-title">A IA analisa, valida e organiza tudo</div>
+          <div class="funciona-desc">Nossa inteligência artificial processa, categoriza e valida seus documentos.</div>
+        </div>
+        <div class="funciona-card">
+          <div class="funciona-icon-circle">
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="18" cy="18" r="18" fill="#18182a"/>
+              <rect x="14" y="20" width="2" height="6" rx="1" fill="#a259ff"/>
+              <rect x="17" y="16" width="2" height="10" rx="1" fill="#a259ff"/>
+              <rect x="20" y="12" width="2" height="14" rx="1" fill="#a259ff"/>
+            </svg>
+          </div>
+          <div class="funciona-num">03</div>
+          <div class="funciona-title">Acompanhe tudo em tempo real</div>
+          <div class="funciona-desc">Acesse checklists, relatórios e receba alertas sobre pendências.</div>
+        </div>
+      </div>
+    </section>
+    <section id="diferenciais" class="container">
+      <h2 class="section-title">Nossos Diferenciais</h2>
+      <div class="diferenciais">
+        <div class="diferencial">Soluções sob medida para cada cliente</div>
+        <div class="diferencial">Equipe multidisciplinar: tecnologia, negócios e UX</div>
+        <div class="diferencial">Suporte humanizado e ágil</div>
+        <div class="diferencial">Resultados comprovados e mensuráveis</div>
+      </div>
+    </section>
+    <section id="depoimentos" class="container">
+      <h2 class="section-title">Depoimentos</h2>
+      <div class="depoimentos">
+        <div class="depoimento">
+          "A AgilizaFLow revolucionou nosso atendimento ao cliente. Hoje, nossa equipe é muito mais produtiva!"<br><br>
+          <b>- Maria S., Diretora de Operações</b>
+        </div>
+        <div class="depoimento">
+          "A automação dos processos internos nos deu mais tempo para focar no crescimento do negócio. Recomendo!"<br><br>
+          <b>- João P., CEO</b>
+        </div>
+      </div>
+    </section>
+    <section id="contato" class="container">
+      <h2 class="section-title">Fale com a AgilizaFLow</h2>
+      <form>
+        <input type="text" placeholder="Seu nome" required>
+        <input type="email" placeholder="Seu e-mail" required>
+        <textarea placeholder="Como podemos ajudar?" required></textarea>
+        <button type="submit" class="cta-btn">Enviar Mensagem</button>
+      </form>
+    </section>
+    <!-- Quem Somos -->
+    <section id="sobre" class="container">
+      <h2 class="section-title">Quem Somos</h2>
+      <p style="text-align:center; max-width: 800px; margin: 0 auto; color:var(--text-light); font-size:1.1rem;">A <b>AgilizaFLow</b> é uma agência especializada em criar agentes de IA personalizados para empresas que buscam eficiência, inovação e resultados mensuráveis. Nossa missão é simplificar processos, reduzir custos e liberar o potencial humano para o que realmente importa.</p>
+    </section>
+  </main>
+  <footer>
+    <div>© 2024 AgilizaFLow. Todos os direitos reservados.</div>
+    <div style="margin-top:8px; font-size:0.95em;">Siga-nos:
+      <a href="#">LinkedIn</a> |
+      <a href="#">Instagram</a>
+    </div>
+  </footer>
+</body>
+</html> 
